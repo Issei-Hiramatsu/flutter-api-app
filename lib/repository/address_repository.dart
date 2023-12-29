@@ -1,23 +1,17 @@
-import 'package:flutter_api_app/domain/entity/address.dart';
-import 'package:flutter_api_app/provider/dio_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_api_app/dto/address_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'address_repository.g.dart';
 
-@Riverpod(keepAlive: true)
-AddressRepository addressRepository(AddressRepositoryRef ref) {
-  return AddressRepository(ref);
-}
+@riverpod
+class AddressRepository extends _$AddressRepository {
+  @override
+  FutureOr<void> build() {}
 
-// APIとやりとりをするRepositoryクラス
-class AddressRepository extends IAddressRepository {
-  AddressRepository(this.ref);
-  Ref ref;
-
-  Future<Address> fetchAddressFromPostalCode(String postalCode) async {
-    final url = 'https://zipcloud.ibsnet.co.jp/api/search';
-    final response =
-        await ref.read(dioProvider).get('$url?zipcode=$postalCode');
-    return Address.fromJson(response.data);
+  Future<void> fetchAddressFromPostalCode(String postalCode) async {
+    final authRepository =
+        ref.read(addressDtoProvider).fetchAddressFromPostalCode(postalCode);
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() => authRepository);
   }
 }
