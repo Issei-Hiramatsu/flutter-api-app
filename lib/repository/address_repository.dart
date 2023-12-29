@@ -1,3 +1,4 @@
+import 'package:flutter_api_app/domain/address.dart';
 import 'package:flutter_api_app/dto/address_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -6,7 +7,9 @@ part 'address_repository.g.dart';
 @riverpod
 class AddressRepository extends _$AddressRepository {
   @override
-  FutureOr<void> build() {}
+  FutureOr<Address?> build() {
+    return null;
+  }
 
   Future<void> fetchAddressFromPostalCode(String postalCode) async {
     final authRepository =
