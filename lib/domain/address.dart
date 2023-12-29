@@ -15,6 +15,6 @@ class Address with _$Address {
       _$AddressFromJson(json);
 }
 
-abstract class IAddressRepository {
+abstract class IAddressDto {
   Future<Address> fetchAddressFromPostalCode(String postalCode);
 }
