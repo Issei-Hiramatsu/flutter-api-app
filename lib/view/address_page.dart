@@ -34,7 +34,10 @@ class AddressPage extends ConsumerWidget {
                 ),
               ),
               switch (address) {
-                AsyncData(:final value) => Text('Value: $value'),
+                AsyncData(:final value) => value == null
+                    ? Text('存在しない郵便番号です')
+                    : Text(
+                        'Value: ${value.prefecture}${value.municipalities}${value.townStreet}'),
                 AsyncError(:final error) => Text('Error: $error'),
                 _ => const CircularProgressIndicator(),
               },

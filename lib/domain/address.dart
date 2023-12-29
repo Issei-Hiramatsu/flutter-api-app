@@ -16,5 +16,5 @@ class Address with _$Address {
 }
 
 abstract class IAddressDto {
-  Future<Address> fetchAddressFromPostalCode(String postalCode);
+  Future<Address?> fetchAddressFromPostalCode(String postalCode);
 }
