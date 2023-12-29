@@ -12,22 +12,35 @@ class AddressPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Address Page'),
       ),
-      body: Column(
-        children: [
-          TextField(
-            onChanged: (value) {
-              if (value.length == 7)
-                ref
-                    .read(addressRepositoryProvider.notifier)
-                    .fetchAddressFromPostalCode(value);
-            },
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: 350,
+                child: TextField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: '郵便番号',
+                  ),
+                  maxLength: 7,
+                  onChanged: (value) {
+                    if (value.length == 7)
+                      ref
+                          .read(addressRepositoryProvider.notifier)
+                          .fetchAddressFromPostalCode(value);
+                  },
+                ),
+              ),
+              switch (address) {
+                AsyncData(:final value) => Text('Value: $value'),
+                AsyncError(:final error) => Text('Error: $error'),
+                _ => const CircularProgressIndicator(),
+              },
+            ],
           ),
-          switch (address) {
-            AsyncData(:final value) => Text('Value: $value'),
-            AsyncError(:final error) => Text('Error: $error'),
-            _ => const CircularProgressIndicator(),
-          },
-        ],
+        ),
       ),
     );
   }
