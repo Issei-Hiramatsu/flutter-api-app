@@ -15,6 +15,8 @@ class Address with _$Address {
       _$AddressFromJson(json);
 }
 
+//抽象クラス
+
 abstract class IAddressDto {
   Future<Address?> fetchAddressFromPostalCode(String postalCode);
 }

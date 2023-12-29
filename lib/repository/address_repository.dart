@@ -4,6 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'address_repository.g.dart';
 
+//AsyncNotifier
+
 @riverpod
 class AddressRepository extends _$AddressRepository {
   @override
